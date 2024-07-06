@@ -27,8 +27,8 @@ Use arrow keys (up and down) to navigate through menu items.
 Press Enter to execute the selected menu item's Execute function, which in this example, prints the item's name.
 Press 'q' to quit and exit the program.
 
-### Usage
-To compile (project dir):
+### Compile
+To compile (in project dir):
 ```
 cmake -S . -B build/
 cd build
