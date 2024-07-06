@@ -19,7 +19,7 @@ int main() {
     // Start the menu interaction
     menu->Start();
 
-    // Clean up: delete allocated memory for MyMenu instance
+    // Clean up
     delete menu;
 
     return 0;
