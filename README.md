@@ -3,7 +3,7 @@ This project is a simple command-line interface (CLI) menu implemented in C++ us
 
 ### Usage
 1. To add a new menu item, you can create a class that inherits from IMenuItem interface.
-DemoItem1/2 is provided as an example.
+DemoItem1/2 are provided as examples.
 2. In the main function, create an instance of MyMenu and add instances of your menu items using AppendItem:
 ```
     // Create an instance of MyMenu with a title
