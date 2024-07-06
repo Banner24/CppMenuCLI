@@ -25,7 +25,6 @@ DemoItem1/2 are provided as examples.
 - Once the program is executed, the CLI menu will display with the specified title and menu items.
 Use arrow keys (up and down) to navigate through menu items.
 Press Enter to execute the selected menu item's Execute function, which in this example, prints the item's name.
-Press 'q' to quit and exit the program.
 
 ### Compile
 To compile (in project dir):
