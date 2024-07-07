@@ -1,0 +1,4 @@
+Here are files that perform various operations involving the menu items.
+
+As example, "DemoItem1.h" calls a script for a specific task.
+Or a new class for a specific task.
