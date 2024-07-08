@@ -3,7 +3,7 @@
 #include <ncurses.h>
 #include <string>
 #include <vector>
-
+#include <memory>
 #include "IMenuItem.h"
 /**
  * @brief A class representing a menu using ncurses.
@@ -19,8 +19,6 @@ class MyMenu {
 		 */
 		MyMenu(std::string menuTitle);
 
-		~MyMenu();
-
 		/**
 		* @brief Starts the menu interaction.
 		*/
@@ -31,9 +29,9 @@ class MyMenu {
 		 * 
 		 * @param item Pointer to the menu item to append.
 		 */
-		void AppendItem(IMenuItem *item);
+		void AppendItem(std::unique_ptr<IMenuItem> item);
 	private:
-		std::vector<IMenuItem*> options; ///< List for menu options 
+		std::vector<std::unique_ptr<IMenuItem>> options; ///< List for menu options 
 		std::string menuTitle; ///< Title of the menu.
 							   ///
 		/**

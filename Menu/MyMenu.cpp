@@ -5,18 +5,12 @@ MyMenu::MyMenu(std::string menuTitle){
 	this->menuTitle = menuTitle;
 	
 	// adds an ExitItem.
-	ExitItem *exit = new ExitItem("Exit");
-	this->options.push_back(exit);
+	auto exit = std::make_unique<ExitItem>("Exit");
+	this->options.push_back(std::move(exit));
 }
-MyMenu::~MyMenu() {
-    // Delete dynamically allocated memory in options vector
-    for (IMenuItem* item : options) {
-        delete item;
-    }
-    options.clear(); // Clear the vector after deleting items
-}
-void MyMenu::AppendItem(IMenuItem *item){
-	this->options.insert(options.end()-1, item);
+
+void MyMenu::AppendItem(std::unique_ptr<IMenuItem> item){
+	this->options.insert(options.end()-1, std::move(item));
 }
 
 void MyMenu::initNcurses(){

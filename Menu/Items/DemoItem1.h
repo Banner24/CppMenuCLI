@@ -30,7 +30,7 @@ class DemoItem1 : public IMenuItem {
 			printf("\nThis is Item: %s\n", this->getItemName().c_str());
 
 			// Example: Create a new MyMenu instance and start it
-			MyMenu *m = new MyMenu("Test Menu");
-			m->Start();
+			auto menu = std::make_unique<MyMenu>("Test Menu");
+			menu->Start();
 		}
 };
