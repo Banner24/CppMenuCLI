@@ -31,7 +31,7 @@ class MyMenu {
 		 */
 		void AppendItem(std::unique_ptr<IMenuItem> item);
 	private:
-		std::vector<std::unique_ptr<IMenuItem>> options; ///< List for menu options 
+		std::vector<std::unique_ptr<IMenuItem>> menuItems; ///< List for menu options 
 		std::string menuTitle; ///< Title of the menu.
 							   ///
 		/**
