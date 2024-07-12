@@ -77,8 +77,8 @@ void MyMenu::Start(){
 void MyMenu::manageChoice(int choice, int highlight){
     endwin(); // Stop ncurses
 	std::system("clear");	
-
-	menuItems[choice]->Open(this);	
+	
+	menuItems[choice]->Open(this);	// opens an item and allows it to manage the menu
 
 	this->initNcurses();
     displayMenu(highlight);
