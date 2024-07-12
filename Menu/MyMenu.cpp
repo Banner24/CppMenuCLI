@@ -1,22 +1,28 @@
 #include "MyMenu.h"
 #include "ExitItem.h"
+#include "IMenuItem.h"
+#include <memory>
+#include <utility>
 
 MyMenu::MyMenu(std::string menuTitle){
 	this->menuTitle = menuTitle;
 	
 	// adds an ExitItem.
-	ExitItem *exit = new ExitItem("Exit");
-	this->options.push_back(exit);
+	auto exit = std::make_unique<ExitItem>("Exit");
+	this->menuItems.push_back(std::move(exit));
 }
-MyMenu::~MyMenu() {
-    // Delete dynamically allocated memory in options vector
-    for (IMenuItem* item : options) {
-        delete item;
-    }
-    options.clear(); // Clear the vector after deleting items
+
+void MyMenu::AppendItem(std::unique_ptr<IMenuItem> item){
+	this->menuItems.insert(menuItems.end()-1, std::move(item));
 }
-void MyMenu::AppendItem(IMenuItem *item){
-	this->options.insert(options.end()-1, item);
+
+void MyMenu::RemoveItem(IMenuItem *item){
+	for (int i =0; i < menuItems.size(); i++) {
+		if (this->menuItems[i].get() == item){
+			this->menuItems.erase(this->menuItems.begin()+i);
+			break;
+		}
+	}
 }
 
 void MyMenu::initNcurses(){
@@ -29,6 +35,7 @@ void MyMenu::initNcurses(){
 
 void MyMenu::Start(){
 	this->initNcurses();
+
 
     int highlight = 0;
     int choice = -1;
@@ -43,7 +50,7 @@ void MyMenu::Start(){
                     --highlight;
                 break;
             case KEY_DOWN:
-                if (highlight < options.size() - 1)
+                if (highlight < menuItems.size() - 1)
                     ++highlight;
                 break;
             case 10: // Enter-Key
@@ -54,7 +61,7 @@ void MyMenu::Start(){
         }
         displayMenu(highlight);
 
-        if (choice == options.size() - 1) // if "Exit" is selected 
+        if (choice == menuItems.size() - 1) // if "Exit" is selected 
             break;
 		
 		if (choice >= 0)
@@ -71,7 +78,7 @@ void MyMenu::manageChoice(int choice, int highlight){
     endwin(); // Stop ncurses
 	std::system("clear");	
 
-	options[choice]->Open();	
+	menuItems[choice]->Open(this);	
 
 	this->initNcurses();
     displayMenu(highlight);
@@ -82,10 +89,10 @@ void MyMenu::displayMenu(int highlight) {
 
     mvprintw(0, 0, "%s", this->menuTitle.c_str());
 
-    for (int i = 0; i < options.size(); ++i) {
+    for (int i = 0; i < menuItems.size(); ++i) {
         if (i == highlight)
             attron(A_REVERSE); // Highlight
-		mvprintw(i + 2, 0, "%s", options[i]->getItemName().c_str());
+		mvprintw(i + 2, 0, "%s", menuItems[i]->getItemName().c_str());
 
         if (i == highlight)
             attroff(A_REVERSE);

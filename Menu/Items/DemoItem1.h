@@ -25,12 +25,13 @@ class DemoItem1 : public IMenuItem {
 		 * 
 		 * Overrides the Open method from IMenuItem.
 		 * Prints a message indicating the selected item and starts a new MyMenu instance.
+		 * @param myMenu Pointer to manage the previous menu
 		 */
-		void Open() override {
+		void Open(MyMenu *myMenu) override {
 			printf("\nThis is Item: %s\n", this->getItemName().c_str());
 
 			// Example: Create a new MyMenu instance and start it
-			MyMenu *m = new MyMenu("Test Menu");
-			m->Start();
+			auto menu = std::make_unique<MyMenu>("Test Menu");
+			menu->Start();
 		}
 };

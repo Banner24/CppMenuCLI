@@ -1,17 +1,19 @@
 #pragma once
 
+#include "MyMenu.h"
+#include <memory>
 #include <stdio.h>
 #include <iostream>
 
+class MyMenu;
 /**
  * @brief Interface for a menu item.
  * 
  * This class defines an interface for menu items with basic properties 
- * like name, ID, and an abstract method for opening the item.
+ * like name and an abstract method for opening the item.
  */
 class IMenuItem {
 	public:
-		virtual ~IMenuItem() {}
 
 		/**
 		 * @brief Retrieves the name of the menu item.
@@ -36,10 +38,10 @@ class IMenuItem {
 		 * 
 		 * This method is meant to be overridden by derived classes to define 
 		 * specific behavior for opening the menu item.
+		 * @param myMenu Pointer to manage the previous menu
 		 */
-		virtual void Open() = 0;
+		virtual void Open(MyMenu *myMenu) = 0;
 
 	private:
 		std::string itemName; ///< Name of the menu item.
-		int itemId;           ///< ID of the menu item.
 };

@@ -22,8 +22,9 @@ class ExitItem : public IMenuItem{
 		 * 
 		 * This function overrides the Open method from the IMenuItem interface.
 		 * It prints a message indicating the selected item.
+		 * @param myMenu Pointer to manage the previous menu
 		 */
-		void Open() override{
+		void Open(MyMenu *myMenu) override{
 			printf("\nThis is Item: %s\n", this->getItemName().c_str());
 		}
 };

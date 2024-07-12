@@ -26,10 +26,11 @@ class DemoItem2 : public IMenuItem {
 		 * Overrides the Open method from IMenuItem.
 		 * Prints a message indicating the selected item and waits for user input.
 		 * Here would be the point to add your code
+		 * @param myMenu Pointer to manage the previous menu 
 		 */
-		void Open() override {
+		void Open(MyMenu *myMenu) override {
 			printf("\nThis is Item: %s\n", this->getItemName().c_str());
-			
+			myMenu->RemoveItem(this);	
 			// Continue here!
 
 			// Example: Wait for user input, then get back to the previous menu 
