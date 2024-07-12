@@ -7,18 +7,18 @@ DemoItem1/2 are provided as examples.
 2. In the main function, create an instance of MyMenu and add instances of your menu items using AppendItem:
 ```
     // Create an instance of MyMenu with a title
-    MyMenu menu("My CLI Menu");
+    auto menu = std::make_unique<MyMenu>("Main Menu");
 
     // Create instances of your menu items
-    DemoItem1* item1 = new DemoItem1("Test1");
-    DemoItem1* item2 = new DemoItem1("Test2");
-    
-    // Append menu items to the menu
-    menu.AppendItem(item1);
-    menu.AppendItem(item2);
+    auto item = std::make_unique<DemoItem1>("Test");
+    auto item2 = std::make_unique<DemoItem2>("Test2");
+
+    // Append DemoItem1 and DemoItem2 to the menu
+    menu->AppendItem(std::move(item));
+    menu->AppendItem(std::move(item2));
     
     // Start the menu loop
-    menu.Start();
+    menu->Start();
 ```
 3. Navigating the Menu:
 
