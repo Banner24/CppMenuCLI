@@ -30,7 +30,6 @@ class DemoItem2 : public IMenuItem {
 		 */
 		void Open(MyMenu *myMenu) override {
 			printf("\nThis is Item: %s\n", this->getItemName().c_str());
-			myMenu->RemoveItem(this);	
 			// Continue here!
 
 			// Example: Wait for user input, then get back to the previous menu 
